@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Goal</string>
+    <string name="franchisee_prompt">How many customers do you plan to visit today?</string>
+</resources>
