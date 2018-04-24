@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        activateDropdown();
-        updateDropdown();
+        updatePrompt();
+        populateDropdown();
     }
 
     private String getLastStoredItem() {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    private void updateDropdown() {
+    private void updatePrompt() {
         String lastSelectedItem = getLastStoredItem();
         if (!lastSelectedItem.equals("")) {
             lastSelectedItem = String.format("<b>Last time you selected %s customers</b>.", lastSelectedItem);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         tvQuestion.setText(Html.fromHtml(updatePrompt));
     }
 
-    private void activateDropdown() {
+    private void populateDropdown() {
         Spinner spinner = findViewById(R.id.spinner_response);
 
         String[] dropDownItems = {"2 customers", "4 customers", "6 customers"};
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 String row = String.format(Locale.getDefault(), "%d, %s;\n", System.currentTimeMillis(), selectedItem);
                 LocalStorage.appendToFile(mContext, Constants.FRANCHISEE_RESPONSES_CSV, row);
                 Toast.makeText(mContext, "Response saved.", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
